@@ -21,8 +21,10 @@ module.exports = {
         'fit': 'fit-content',
       },
       fontWeight: {
-        '600': '600', // Añadir peso de fuente personalizado
-        "400": "400"
+        '600': '600', // Semibold
+        "400": "400", // Regular
+        'semibold': '600', // Semibold
+        "regular": "400" // regular
       },
       colors: {
          primaryViolet: "#4E358C",
