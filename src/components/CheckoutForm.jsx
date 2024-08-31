@@ -55,15 +55,14 @@ function CheckoutForm() {
   const navigate = useNavigate();
 
   const enviarCompra = async (order) => {
-  const response = await writeToFirestore(order);
-  if(response.success){
-    setId(response.id);
-    navigate('/successfully', { state: { id: response.id } });
-  }else {
-    console.log("no se guardo correctamente en la base de datos.");
-  }
-  }
-
+    const response = await writeToFirestore(order);
+    if (response.success) {
+      setId(response.id);
+      navigate("/successfully", { state: { id: response.id } });
+    } else {
+      console.log("no se guardo correctamente en la base de datos.");
+    }
+  };
 
   // Configurar react-hook-form con Zod
   const {
@@ -74,34 +73,36 @@ function CheckoutForm() {
     resolver: zodResolver(schema), // Conectar Zod con react-hook-form
   });
 
-  
-    // Función para guardar la transacción en Firebase
-    const saveTransaction = (data) => {
-      const transactionRef = ref(database, 'transactions/' + new Date().getTime()); // Usa una marca de tiempo como ID único
-      set(transactionRef, data)
-        .then(() => {
-          console.log('Transacción guardada con éxito');
-        })
-        .catch((error) => {
-          console.error('Error al guardar la transacción:', error);
-        });
-    };
-  
-    // Función para manejar el envío del formulario
-    const onSubmit = (data) => {
-      console.log('Datos del formulario:', data);
-      enviarCompra(data);
-      saveTransaction(data); // Guarda la transacción en Firebase
-    };
+  // Función para guardar la transacción en Firebase
+  const saveTransaction = (data) => {
+    const transactionRef = ref(
+      database,
+      "transactions/" + new Date().getTime()
+    ); // Usa una marca de tiempo como ID único
+    set(transactionRef, data)
+      .then(() => {
+        console.log("Transacción guardada con éxito");
+      })
+      .catch((error) => {
+        console.error("Error al guardar la transacción:", error);
+      });
+  };
 
+  // Función para manejar el envío del formulario
+  const onSubmit = (data) => {
+    console.log("Datos del formulario:", data);
+    enviarCompra(data);
+    saveTransaction(data); // Guarda la transacción en Firebase
+  };
 
   return (
-    <div className="max-w-[500px]">
+    <div className="max-w-[500px] ">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <Label>
-            Número de tarjeta:
+          <Label className=" font-400 text-[20px] ">
+            Número de tarjeta
             <Input
+              className="text-[14px] mt-[10px]"
               type="text"
               {...register("cardNumber")}
               placeholder="Ingresá los números de la tarjeta"
@@ -110,9 +111,10 @@ function CheckoutForm() {
           </Label>
         </div>
         <div className="flex mt-[15px]  gap-10">
-          <Label>
-            Expiración:
+          <Label className=" font-400 text-[20px]">
+            Expiración
             <Input
+              className="text-[14px] mt-[10px]"
               type="number"
               {...register("expiryMonth")}
               placeholder="Mes"
@@ -120,23 +122,34 @@ function CheckoutForm() {
             {errors.expiryMonth && <p>{errors.expiryMonth.message}</p>}
           </Label>
 
-          <Label>
-            Año:
-            <Input type="text" {...register("expiryYear")} placeholder="Año" />
+          <Label className=" font-400 text-[20px]">
+            Año
+            <Input
+              type="text"
+              className="text-[14px] mt-[10px]"
+              {...register("expiryYear")}
+              placeholder="Año"
+            />
             {errors.expiryYear && <p>{errors.expiryYear.message}</p>}
           </Label>
 
-          <Label>
-            CVV:
-            <Input type="text" {...register("cvv")} placeholder="CVV" />
+          <Label className=" font-400 text-[20px]">
+            CVV
+            <Input
+              type="text"
+              className="text-[14px] mt-[10px]"
+              {...register("cvv")}
+              placeholder="CVV"
+            />
             {errors.cvv && <p>{errors.cvv.message}</p>}
           </Label>
         </div>
 
         <div className="mt-[15px] mb-[15px]">
-          <Label>
+          <Label className=" font-400 text-[20px]">
             Nombre
             <Input
+              className="text-[14px] mt-[10px]"
               type="text"
               {...register("cardHolderName")}
               placeholder="Ingresá el nombre y apellido"
@@ -145,12 +158,12 @@ function CheckoutForm() {
           </Label>
         </div>
 
-        <div className="flex w-auto">
+        <div className="flex w-auto pt-[64px]">
           <Button
             type="submit"
-            className="bg-primaryViolet text-white rounded-[50px] w-full"
+            className="bg-primaryViolet text-white rounded-[50px] h-[56px] w-full text-[16px] "
           >
-            Pagar
+            Continuar
           </Button>
         </div>
       </form>

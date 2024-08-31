@@ -22,6 +22,7 @@ module.exports = {
       },
       fontWeight: {
         '600': '600', // Añadir peso de fuente personalizado
+        "400": "400"
       },
       colors: {
          primaryViolet: "#4E358C",

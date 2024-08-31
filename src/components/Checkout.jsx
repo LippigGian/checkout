@@ -44,7 +44,6 @@ function Checkout() {
               <div className="flex items-center justify-between w-full gap-2">
                 <div className="flex items-center gap-5">
                   <img src={modo} alt="Credit Card" className="w-[24.67] " />{" "}
-                  {/* Usar el SVG importado */}
                   <div className="flex flex-col  text-left ">
                     <p className="primary font-600 text-[16px]">
                       Pagar con MODO
