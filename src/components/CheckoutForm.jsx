@@ -10,6 +10,7 @@ import { Check } from "lucide-react";
 
 import { Navigate, useNavigate } from "react-router-dom";
 
+import "../components/spinner.css"
 import { writeToFirestore } from "../utils/ventas";
 
 import { database, ref, set } from "../utils/firebaseConfig"; // Importar la instancia de la base de datos de Firebase
@@ -50,12 +51,15 @@ const schema = z.object({
 
 function CheckoutForm() {
   const [id, setId] = useState(undefined);
+  const [loading, setLoading] = useState(false); // Estado para controlar la carga
 
   //Navegar a la pagina de exito
   const navigate = useNavigate();
 
   const enviarCompra = async (order) => {
+    setLoading(true); // Iniciar el modo de carga
     const response = await writeToFirestore(order);
+    setLoading(false); // Terminar el modo de carga
     if (response.success) {
       setId(response.id);
       navigate("/successfully", { state: { id: response.id } });
@@ -97,6 +101,7 @@ function CheckoutForm() {
 
   return (
     <div className="max-w-[500px] ">
+       {loading && <div className="loading-spinner"></div>} {/* Indicador de carga */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label className=" font-400 text-[20px] ">
