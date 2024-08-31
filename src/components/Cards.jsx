@@ -20,7 +20,7 @@ function Cards({children, title, description}) {
         <CardDescription>{description}</CardDescription>
       </CardHeader> */}
       
-        <CardContent className="flex flex-col gap-4 p-5">
+        <CardContent className="flex flex-col gap-[29px] p-6">
           {children}
           
         </CardContent>

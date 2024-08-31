@@ -20,6 +20,9 @@ module.exports = {
       height: {
         'fit': 'fit-content',
       },
+      fontWeight: {
+        '600': '600', // Añadir peso de fuente personalizado
+      },
       colors: {
          primaryViolet: "#4E358C",
          leyenda:"#737373",
