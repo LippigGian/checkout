@@ -42,12 +42,18 @@ const schema = z.object({
       message: "El año de expiración debe ser el año actual o futuro",
     }),
 
-  cvv: z
+    cvv: z
     .string()
-    .length(3, "El CVV debe tener 3 dígitos")
+    .min(3, "El CVV debe tener al menos 3 dígitos")
+    .max(4, "El CVV no puede tener más de 4 dígitos")
     .regex(/^\d+$/, "El CVV solo puede contener dígitos"),
+  
 
-  cardHolderName: z.string().nonempty("Nombre del titular es requerido"),
+    cardHolderName: z
+    .string()
+    .nonempty("El nombre del titular es requerido")
+    .regex(/^[a-zA-Z\s]+$/, "El nombre del titular solo puede contener letras y espacios"),
+  
 });
 
 function CheckoutForm() {
