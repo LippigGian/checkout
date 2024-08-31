@@ -29,6 +29,7 @@ module.exports = {
       colors: {
          primaryViolet: "#4E358C",
          leyenda:"#737373",
+         error: "#D11919",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

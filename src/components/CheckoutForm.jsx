@@ -7,10 +7,11 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Check } from "lucide-react";
+import { CircleAlert } from "lucide-react"; // Importar el icono
 
 import { Navigate, useNavigate } from "react-router-dom";
 
-import "../components/spinner.css"
+import "../components/spinner.css";
 import { writeToFirestore } from "../utils/ventas";
 
 import { database, ref, set } from "../utils/firebaseConfig"; // Importar la instancia de la base de datos de Firebase
@@ -27,7 +28,7 @@ const schema = z.object({
     .string()
     .min(1, "El mes debe tener al menos 1 dígitos")
     .max(2, "El mes no puede tener más de 2 dígitos")
-    .regex(/^(0[1-9]|1[0-2])$/, "El mes debe estar entre 01 y 12"),
+    .regex(/^([1-9]|1[0-2])$/, "El mes debe estar entre 01 y 12"),
 
   expiryYear: z
     .string()
@@ -101,7 +102,8 @@ function CheckoutForm() {
 
   return (
     <div className="max-w-[500px] ">
-       {loading && <div className="loading-spinner"></div>} {/* Indicador de carga */}
+      {loading && <div className="loading-spinner"></div>}{" "}
+      {/* Indicador de carga */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label className=" font-400 text-[20px] ">
@@ -112,7 +114,17 @@ function CheckoutForm() {
               {...register("cardNumber")}
               placeholder="Ingresá los números de la tarjeta"
             />
-            {errors.cardNumber && <p>{errors.cardNumber.message}</p>}
+            {errors.cardNumber && (
+              <p className="mt-3 text-error text-[13px] flex  items-center ">
+                <CircleAlert className="w-[18px] mr-2" />
+                {errors.cardNumber.message}
+              </p>
+            )}
+            {/* {errors.cardNumber && (
+              <p className="mt-3 text-error text-[13px]">
+                {errors.cardNumber.message}
+              </p>
+            )} */}
           </Label>
         </div>
         <div className="flex mt-[15px]  gap-10">
@@ -123,19 +135,38 @@ function CheckoutForm() {
               type="number"
               {...register("expiryMonth")}
               placeholder="Mes"
+              min="0"
+              max="12"
             />
-            {errors.expiryMonth && <p>{errors.expiryMonth.message}</p>}
+            {/* {errors.expiryMonth && <p className="mt-3 text-error text-[13px]">{errors.expiryMonth.message}</p>} */}
+            {errors.expiryMonth && (
+              <p className="mt-3 text-error text-[13px] flex ">
+                <CircleAlert className="w-[40px] mr-2" />
+                {errors.expiryMonth.message}
+              </p>
+            )}
           </Label>
 
           <Label className=" font-400 text-[20px]">
             Año
             <Input
-              type="text"
+              type="number"
               className="text-[14px] mt-[10px]"
               {...register("expiryYear")}
               placeholder="Año"
+              min="0"
             />
-            {errors.expiryYear && <p>{errors.expiryYear.message}</p>}
+            {errors.expiryYear && (
+              <p className="mt-3 text-error text-[13px] flex ">
+                <CircleAlert className="w-[40px] mr-2" />
+                {errors.expiryYear.message}
+              </p>
+            )}
+            {/* {errors.expiryYear && (
+              <p className="mt-3 text-error text-[13px]">
+                {errors.expiryYear.message}
+              </p>
+            )} */}
           </Label>
 
           <Label className=" font-400 text-[20px]">
@@ -146,7 +177,17 @@ function CheckoutForm() {
               {...register("cvv")}
               placeholder="CVV"
             />
-            {errors.cvv && <p>{errors.cvv.message}</p>}
+            {errors.cvv && (
+              <p className="mt-3 text-error text-[13px] flex ">
+                <CircleAlert className="w-[40px] mr-2" />
+                {errors.cvv.message}
+              </p>
+            )}
+            {/* {errors.cvv && (
+              <p className="mt-3 text-error text-[13px]">
+                {errors.cvv.message}
+              </p>
+            )} */}
           </Label>
         </div>
 
@@ -159,7 +200,12 @@ function CheckoutForm() {
               {...register("cardHolderName")}
               placeholder="Ingresá el nombre y apellido"
             />
-            {errors.cardHolderName && <p>{errors.cardHolderName.message}</p>}
+            {errors.cardHolderName && (
+              <p className="mt-3 text-error text-[13px] flex flex  items-center">
+                <CircleAlert className="w-[18px] mr-2" />
+                {errors.cardHolderName.message}
+              </p>
+            )}
           </Label>
         </div>
 
