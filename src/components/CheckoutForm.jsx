@@ -120,6 +120,7 @@ function CheckoutForm() {
               type="text"
               {...register("cardNumber", { required: true })}
               placeholder="Ingresá los números de la tarjeta"
+              // autoComplete="off"
             />
             {errors.cardNumber && (
               <p className="mt-3 text-error text-[13px] flex  items-center ">
