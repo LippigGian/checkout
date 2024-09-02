@@ -42,18 +42,19 @@ const schema = z.object({
       message: "El año de expiración debe ser el año actual o futuro",
     }),
 
-    cvv: z
+  cvv: z
     .string()
     .min(3, "El CVV debe tener al menos 3 dígitos")
     .max(4, "El CVV no puede tener más de 4 dígitos")
     .regex(/^\d+$/, "El CVV solo puede contener dígitos"),
-  
 
-    cardHolderName: z
+  cardHolderName: z
     .string()
     .nonempty("El nombre del titular es requerido")
-    .regex(/^[a-zA-Z\s]+$/, "El nombre del titular solo puede contener letras y espacios"),
-  
+    .regex(
+      /^[a-zA-Z\s]+$/,
+      "El nombre del titular solo puede contener letras y espacios"
+    ),
 });
 
 function CheckoutForm() {
@@ -107,7 +108,7 @@ function CheckoutForm() {
   };
 
   return (
-    <div className="max-w-[500px] ">
+    <div className="max-w-[500px]">
       {loading && <div className="loading-spinner"></div>}{" "}
       {/* Indicador de carga */}
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,7 +118,7 @@ function CheckoutForm() {
             <Input
               className="text-[14px] mt-[10px]"
               type="text"
-              {...register("cardNumber")}
+              {...register("cardNumber", { required: true })}
               placeholder="Ingresá los números de la tarjeta"
             />
             {errors.cardNumber && (

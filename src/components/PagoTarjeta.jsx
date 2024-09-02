@@ -7,8 +7,8 @@ import { ContextInput } from "@/context/ContextInput";
 function PagoTarjeta() {
   const {amount} = useContext(ContextInput);
   return (
-    <div className='flex justify-center  gap-4 w-full'>
-      <div className='flex flex-1 justify-center max-w-[500px]'>
+    <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-4  p-5">
+      <div className='flex flex-1 justify-center w-full max-w-[500px]'>
         <Cards className='flex-1 '>
           <div className='p-4'>
             <p className='mb-[32px] font-600 text-[20px]'>Ingresá los datos de la tarjeta</p>
@@ -16,7 +16,7 @@ function PagoTarjeta() {
           </div>
         </Cards>
       </div>
-      <div className='flex flex-1 justify-center max-w-[500px] h-fit'>
+      <div className='flex flex-1 justify-center w-full max-w-[500px]'>
         <Cards className='flex-1 '>
           <div className='p-4 flex flex-col gap-4'>
             <p className='mb-4 font-600 text-[20px] pb-[38px]'>Detalle de la compra</p>

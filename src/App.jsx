@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SimpleForm from "./components/SimpleForm";
 import Successfully from "./components/Successfully";
 import  ContextInputProvider  from "./context/ContextInput"
+import CheckoutForm2 from "./components/CheckoutForm2";
 function App() {
   return (
     <Router>
       <ContextInputProvider>
         <Navbar></Navbar>
+        {/* <CheckoutForm2></CheckoutForm2> */}
     <Routes>
 
     
