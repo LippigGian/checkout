@@ -127,6 +127,11 @@ function CheckoutForm() {
               {...register("cardNumber", { required: true })}
               placeholder="Ingresá los números de la tarjeta"
               // autoComplete="off"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault(); // Previene la entrada de caracteres no numéricos
+                }
+              }}
             />
             {errors.cardNumber && (
               <p className="mt-3 text-error text-[13px] flex  items-center ">
@@ -149,8 +154,20 @@ function CheckoutForm() {
               type="number"
               {...register("expiryMonth")}
               placeholder="Mes"
-              min="0"
+              min="1"
               max="12"
+              inputMode="numeric" // Asegura que el teclado numérico se muestre en dispositivos móviles
+              pattern="[0-9]*" // Restringe la entrada a solo números
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault(); // Previene la entrada de caracteres no numéricos
+                }
+              }}
+              onInput={(e) => {
+                if (e.target.value.length > 2) {
+                  e.target.value = e.target.value.slice(0, 2); // Limita la entrada a 2 caracteres
+                }
+              }}
             />
             {/* {errors.expiryMonth && <p className="mt-3 text-error text-[13px]">{errors.expiryMonth.message}</p>} */}
             {errors.expiryMonth && (
@@ -169,6 +186,11 @@ function CheckoutForm() {
               {...register("expiryYear")}
               placeholder="Año"
               min="0"
+              onInput={(e) => {
+                if (e.target.value.length > 2) {
+                  e.target.value = e.target.value.slice(0, 4);
+                }
+              }}
             />
             {errors.expiryYear && (
               <p className="mt-3 text-error text-[13px] flex ">
@@ -190,6 +212,11 @@ function CheckoutForm() {
               className="text-[14px] mt-[10px]"
               {...register("cvv")}
               placeholder="CVV"
+              onInput={(e) => {
+                if (e.target.value.length > 2) {
+                  e.target.value = e.target.value.slice(0, 4); // Limita la entrada a 2 caracteres
+                }
+              }}
             />
             {errors.cvv && (
               <p className="mt-3 text-error text-[13px] flex ">
@@ -230,6 +257,11 @@ function CheckoutForm() {
               type="text"
               {...register("dni")}
               placeholder="Ingresá el DNI"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault(); // Previene la entrada de caracteres no numéricos
+                }
+              }}
             />
             {errors.dni && (
               <p className="mt-3 text-error text-[13px] flex flex  items-center">
