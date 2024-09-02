@@ -216,6 +216,24 @@ function CheckoutForm() {
             )}
           </Label>
         </div>
+        <div className="mt-[15px] mb-[15px]">
+          <Label className=" font-400 text-[20px]">
+            DNI
+            <Input
+              className="text-[14px] mt-[10px]"
+              type="text"
+              {...register("dni")}
+              placeholder="Ingresá el DNI"
+            />
+            {errors.dni && (
+              <p className="mt-3 text-error text-[13px] flex flex  items-center">
+                <CircleAlert className="w-[18px] mr-2" />
+                {errors.dni.message}
+              </p>
+            )}
+            {/* Falta agregar validacion de dni */}
+          </Label>
+        </div>
 
         <div className="flex w-auto pt-[64px]">
           <Button
