@@ -55,6 +55,12 @@ const schema = z.object({
       /^[a-zA-Z\s]+$/,
       "El nombre del titular solo puede contener letras y espacios"
     ),
+
+  dni: z
+    .string()
+    .min(7, "El DNI debe tener al menos 7 dígitos")
+    .max(8, "El DNI no puede tener más de 8 dígitos")
+    .regex(/^\d+$/, "El DNI solo puede contener dígitos"),
 });
 
 function CheckoutForm() {
@@ -231,7 +237,6 @@ function CheckoutForm() {
                 {errors.dni.message}
               </p>
             )}
-            {/* Falta agregar validacion de dni */}
           </Label>
         </div>
 
